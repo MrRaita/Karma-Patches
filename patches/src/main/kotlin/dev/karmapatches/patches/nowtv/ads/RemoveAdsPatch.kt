@@ -1,9 +1,8 @@
-package dev.nowtvpatches.patches.nowtv.ads
+package dev.karmapatches.patches.nowtv.ads
 
-// NOT: import yolları Morphe sürümüne göre kontrol edilmeli.
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
-
+import dev.karmapatches.patches.nowtv.NOW_TV_COMPATIBILITY
 
 /** Banner reklamları (Google Ad Manager) hiç yüklemeden gizler. */
 @Suppress("unused")
@@ -12,7 +11,7 @@ val removeBannerAdsPatch = bytecodePatch(
     description = "Removes Google Ad Manager banners across the NOW app.",
     default = true,
 ) {
-    compatibleWith(NOW_COMPATIBILITY)
+    compatibleWith(NOW_TV_COMPATIBILITY)
 
     execute {
         // p0 = AdManagerAdView. GONE (8) yapıp çık; reklam isteği hiç gitmez.
@@ -38,7 +37,7 @@ val removeVideoAdsPatch = bytecodePatch(
     description = "Disables IMA/VMAP pre-roll and mid-roll ads in on-demand videos.",
     default = true,
 ) {
-    compatibleWith(NOW_COMPATIBILITY)
+    compatibleWith(NOW_TV_COMPATIBILITY)
 
     execute {
         vodAdsLoaderProviderFingerprint.method.addInstructions(

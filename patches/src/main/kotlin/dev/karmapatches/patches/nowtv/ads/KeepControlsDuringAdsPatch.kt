@@ -1,7 +1,8 @@
-package dev.nowtvpatches.patches.nowtv.ads
+package dev.karmapatches.patches.nowtv.ads
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import dev.karmapatches.patches.nowtv.NOW_TV_COMPATIBILITY
 
 /**
  * Canlı yayında reklam başlayınca uygulama oynatıcı kontrol çubuğunu (ileri/geri sarma,
@@ -15,7 +16,7 @@ val keepControlsDuringAdsPatch = bytecodePatch(
     description = "Stops the app from hiding the player controls when a live ad starts, so you can seek past it.",
     default = true,
 ) {
-    compatibleWith(NOW_COMPATIBILITY)
+    compatibleWith(NOW_TV_COMPATIBILITY)
 
     execute {
         // isDaionAdVisible alanı başka yerde okunmuyor (doğrulandı); gizleme komple atlanır.

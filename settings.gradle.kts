@@ -1,4 +1,4 @@
-rootProject.name = "Karma-Patch"
+rootProject.name = "Karma-Patches"
 
 pluginManagement {
     repositories {

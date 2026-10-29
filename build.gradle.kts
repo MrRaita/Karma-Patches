@@ -1,1 +1,1 @@
-// Root build configuration for Karma-Patch.
+// Root build configuration for Karma-Patches.

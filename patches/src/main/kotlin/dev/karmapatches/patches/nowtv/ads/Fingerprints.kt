@@ -1,10 +1,7 @@
-package dev.nowtvpatches.patches.nowtv.ads
+package dev.karmapatches.patches.nowtv.ads
 
-// NOT: import yolları ve DSL adları Morphe sürümüne göre değişebilir.
-// Aşağıdaki imza bilgileri NOW 7.6.258 base.apk içinden doğrulandı.
+// İmza bilgileri NOW 7.6.258 base.apk içinden doğrulandı.
 import app.morphe.patcher.fingerprint
-import app.morphe.patcher.patch.Compatibility
-import app.morphe.patcher.patch.AppTarget
 
 /**
  * Banner reklam yükleyici (Google Ad Manager).
@@ -69,13 +66,3 @@ internal val daionAdInFingerprint = fingerprint {
             method.name == "onDaionAdIn"
     }
 }
-
-
-internal val NOW_COMPATIBILITY = Compatibility(
-    name = "NOW TV",
-    packageName = "tr.com.nowtv.android",
-    targets = listOf(
-        AppTarget(version = "7.6.258"),
-        AppTarget(version = "7.0.305")
-    )
-)

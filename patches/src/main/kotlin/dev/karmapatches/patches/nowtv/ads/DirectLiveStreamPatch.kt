@@ -1,8 +1,10 @@
-package dev.nowtvpatches.patches.nowtv.ads
+package dev.karmapatches.patches.nowtv.ads
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import dev.karmapatches.patches.nowtv.NOW_TV_COMPATIBILITY
 import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
@@ -21,7 +23,7 @@ val directLiveStreamPatch = bytecodePatch(
     description = "Bypasses DAION and plays the plain live URL. May not work if the server rejects it.",
     default = false,
 ) {
-    compatibleWith(NOW_COMPATIBILITY)
+    compatibleWith(NOW_TV_COMPATIBILITY)
 
     execute {
         val method = liveInitPlayerFingerprint.method
@@ -34,6 +36,13 @@ val directLiveStreamPatch = bytecodePatch(
                 ((it as ReferenceInstruction).reference as? MethodReference)?.name == "liveStreamTokenGenerator"
         }
         require(index >= 0) { "liveStreamTokenGenerator call not found" }
+
+        // Enjekte kod v3/v4/v5 kayıtlarına güveniyor. Sürüm farkında düzen değiştiyse
+        // çalışma anında VerifyError yerine yamalama sırasında net hatayla dur.
+        val call = instructions.elementAt(index) as FiveRegisterInstruction
+        require(call.registerCount == 4 && call.registerD == 3 && call.registerE == 4 && call.registerF == 5) {
+            "Unexpected register layout around liveStreamTokenGenerator call; patch not safe for this app version"
+        }
 
         method.addInstructions(
             index,

@@ -1,15 +1,23 @@
-# NOW TV (tr.com.nowtv.android) Morphe yamaları
+# Karma Patches
 
-Hedef: NOW (Türkiye) 7.6.258. Kendi depon için, resmi Morphe deposundan bağımsız.
+Yamasını bulamadığım uygulamalar için AI ile hazırlayıp yayınladığım Morphe yama deposu.
 
-| Yama | Varsayılan | Ne yapar |
-|---|---|---|
-| Remove banner ads | açık | Google Ad Manager banner'larını hiç yüklemeden gizler |
-| Remove video ads | açık | Dizi/film/program videolarındaki IMA (VMAP) reklamlarını kapatır |
-| Keep player controls during live ads | açık | Canlı reklam başlayınca kontrol çubuğunun gizlenmesini engeller, ileri sarma tuşları çalışır |
-| Live stream without ad insertion (experimental) | kapalı | Canlı yayında DAION'u atlayıp düz yayın adresini dener |
+## Desteklenen uygulamalar
 
-## Önemli notlar
-- Canlı yayın reklamları (DAION) yayına gömülüdür; istemcide silinemez. Deneysel yama tek çıkış yolu ama sunucu kabul etmezse yayın açılmaz.
-- Derlenmedi ve cihazda denenmedi. `build.gradle.kts` dosyaları ve import yolları Morphe şablonuna göre uyarlanmalı.
-- Ayrıntılı analiz: `docs/ANALIZ.md`
+| Uygulama | Paket | Sürümler | Yamalar |
+|---|---|---|---|
+| NOW TV | `tr.com.nowtv.android` | 7.6.258, 7.0.305 | [docs/apps/nowtv.md](docs/apps/nowtv.md) |
+
+## Morphe Manager'a ekleme
+Kaynak olarak depo adresini ekle: `https://github.com/MrRaita/Karma-Patches`
+(Manager, son GitHub Release içindeki `.mpp` dosyasını kullanır; en az bir release yayınlanmış olmalı.)
+
+## Yayınlama
+`git tag v1.0.0 && git push origin v1.0.0` ya da Actions > "Release patches" > Run workflow.
+Sürüm numarası tag'den gelir, release'e `.mpp` otomatik eklenir.
+
+## Yeni uygulama eklemek
+`patches/src/main/kotlin/dev/karmapatches/patches/<uygulama>/` altında ayrı paket aç; uygulamanın
+`Compatibility` tanımı o paketin kökünde, fingerprint ve yamalar alt paketlerde olsun.
+
+> Yamalar yalnızca belirtilen sürümler için doğrulanır. Derlemenin başarılı olması çalışma anı uyumluluğunu garanti etmez.

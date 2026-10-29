@@ -1,13 +1,13 @@
-group = "dev.nowtvpatches"
+group = "dev.karmapatches"
 
 patches {
     about {
-        name = "NOW TV Patches"
-        description = "Custom patches for the NOW TV Android app"
-        source = "https://github.com/MrRaita/Karma-Patch"
+        name = "Karma Patches"
+        description = "Yamasını bulamadığım uygulamalar için AI ile hazırlayıp yayınladığım yama deposu."
+        source = "https://github.com/MrRaita/Karma-Patches"
         author = "MrRaita"
         contact = "https://github.com/MrRaita"
-        website = "https://github.com/MrRaita/Karma-Patch"
+        website = "https://github.com/MrRaita/Karma-Patches"
         license = "GPLv3"
     }
 }
