@@ -17,12 +17,14 @@ jobs:
           distribution: temurin
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
       - name: Build
         env:
           # Morphe paketleri GitHub Packages'tan geliyorsa şablondaki ortam değişkenlerini kullan
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew :patches:build --no-daemon
+        run: gradle :patches:build --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: nowtv-patches
