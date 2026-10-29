@@ -1,11 +1,13 @@
-// TODO: Morphe şablonundaki patches/build.gradle.kts ile değiştir.
-// Önemli olan: bağımlılık (morphe patcher), Kotlin JVM hedefi ve .mpp üreten görev.
-plugins {
-    kotlin("jvm")
-}
+group = "dev.nowtvpatches"
 
-kotlin { jvmToolchain(17) }
-
-dependencies {
-    // implementation("app.morphe:morphe-patcher:<sürüm>")   // şablondaki satırı kullan
+patches {
+    about {
+        name = "NOW TV Patches"
+        description = "Custom patches for the NOW TV Android app"
+        source = "https://github.com/MrRaita/Karma-Patch"
+        author = "MrRaita"
+        contact = "https://github.com/MrRaita"
+        website = "https://github.com/MrRaita/Karma-Patch"
+        license = "GPLv3"
+    }
 }

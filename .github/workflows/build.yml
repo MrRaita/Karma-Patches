@@ -1,31 +1,35 @@
 name: Build patches
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
-      - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: '8.10.2'
-      - name: Build
+          java-version: '21'
+
+      - name: Build Morphe patches
         env:
-          # Morphe paketleri GitHub Packages'tan geliyorsa şablondaki ortam değişkenlerini kullan
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gradle :patches:build --no-daemon
-      - uses: actions/upload-artifact@v4
+        run: ./gradlew :patches:buildAndroid --no-daemon
+
+      - name: Upload patch bundle
+        uses: actions/upload-artifact@v4
         with:
           name: nowtv-patches
-          path: patches/build/libs/*
+          path: patches/build/libs/*.mpp
+          if-no-files-found: error

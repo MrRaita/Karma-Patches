@@ -1,19 +1,25 @@
-// TODO: Morphe şablonundaki settings.gradle.kts ile eşleştir (özellikle Morphe paket deposu)
+rootProject.name = "Karma-Patch"
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        mavenCentral()
         google()
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/MorpheApp/registry")
+            credentials {
+                username = providers.gradleProperty("gpr.user").orNull
+                    ?: System.getenv("GITHUB_ACTOR")
+                password = providers.gradleProperty("gpr.key").orNull
+                    ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-        google()
-        // TODO: Morphe patcher'ın yayınlandığı depoyu şablondan buraya ekle
-    }
+plugins {
+    id("app.morphe.patches") version "2.0.0"
 }
 
-rootProject.name = "nowtv-patches"
 include(":patches")
