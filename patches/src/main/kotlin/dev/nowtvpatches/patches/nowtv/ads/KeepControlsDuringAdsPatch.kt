@@ -15,13 +15,7 @@ val keepControlsDuringAdsPatch = bytecodePatch(
     description = "Stops the app from hiding the player controls when a live ad starts, so you can seek past it.",
     default = true,
 ) {
-    compatibleWith(
-        Compatibility(
-            name = "NOW TV",
-            packageName = "tr.com.nowtv.android",
-            targets = listOf(AppTarget(version = "7.6.258"))
-        )
-    )
+    compatibleWith(NOW_COMPATIBILITY)
 
     execute {
         // isDaionAdVisible alanı başka yerde okunmuyor (doğrulandı); gizleme komple atlanır.

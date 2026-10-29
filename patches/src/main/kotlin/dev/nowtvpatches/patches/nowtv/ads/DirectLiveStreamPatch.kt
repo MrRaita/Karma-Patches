@@ -21,13 +21,7 @@ val directLiveStreamPatch = bytecodePatch(
     description = "Bypasses DAION and plays the plain live URL. May not work if the server rejects it.",
     default = false,
 ) {
-    compatibleWith(
-        Compatibility(
-            name = "NOW TV",
-            packageName = "tr.com.nowtv.android",
-            targets = listOf(AppTarget(version = "7.6.258"))
-        )
-    )
+    compatibleWith(NOW_COMPATIBILITY)
 
     execute {
         val method = liveInitPlayerFingerprint.method
