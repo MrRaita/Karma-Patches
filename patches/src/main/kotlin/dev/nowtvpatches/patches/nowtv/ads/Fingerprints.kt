@@ -74,5 +74,8 @@ internal val daionAdInFingerprint = fingerprint {
 internal val NOW_COMPATIBILITY = Compatibility(
     name = "NOW TV",
     packageName = "tr.com.nowtv.android",
-    targets = listOf(AppTarget(version = "7.6.258"))
+    targets = listOf(
+        AppTarget(version = "7.6.258"),
+        AppTarget(version = "7.0.305")
+    )
 )
