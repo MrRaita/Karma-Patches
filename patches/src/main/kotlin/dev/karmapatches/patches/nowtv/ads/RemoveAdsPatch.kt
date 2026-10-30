@@ -2,6 +2,7 @@ package dev.karmapatches.patches.nowtv.ads
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import dev.karmapatches.debugLogSmali
 import dev.karmapatches.patches.nowtv.NOW_TV_COMPATIBILITY
 
 /** Banner reklamları (Google Ad Manager) hiç yüklemeden gizler. */
@@ -20,6 +21,7 @@ val removeBannerAdsPatch = bytecodePatch(
             """
                 const/16 v0, 0x8
                 invoke-virtual { p0, v0 }, Lcom/google/android/gms/ads/admanager/AdManagerAdView;->setVisibility(I)V
+                ${debugLogSmali("p1", "p2", "banner ad blocked")}
                 return-void
             """,
         )
@@ -43,6 +45,7 @@ val removeVideoAdsPatch = bytecodePatch(
         vodAdsLoaderProviderFingerprint.method.addInstructions(
             0,
             """
+                ${debugLogSmali("p0", "p1", "vod ads loader disabled")}
                 const/4 v0, 0x0
                 return-object v0
             """,

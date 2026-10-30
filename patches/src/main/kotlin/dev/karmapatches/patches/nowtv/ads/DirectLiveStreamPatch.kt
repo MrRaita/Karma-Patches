@@ -2,6 +2,7 @@ package dev.karmapatches.patches.nowtv.ads
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import dev.karmapatches.debugLogSmali
 import dev.karmapatches.patches.nowtv.NOW_TV_COMPATIBILITY
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -60,6 +61,7 @@ val directLiveStreamPatch = bytecodePatch(
                 invoke-interface { v0 }, Lcom/google/android/exoplayer2/ExoPlayer;->prepare()V
                 const/4 v2, 0x1
                 invoke-interface { v0, v2 }, Lcom/google/android/exoplayer2/ExoPlayer;->setPlayWhenReady(Z)V
+                ${debugLogSmali("v6", "v7", "live stream played without ad insertion")}
                 return-void
             """,
         )

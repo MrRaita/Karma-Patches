@@ -33,3 +33,5 @@ Tüm yamalar tek bir metodun başına talimat ekler (`addInstructions(0, ...)`);
 - Yamalar yalnızca reklam yükleme/gösterme noktalarını keser. Reklam ve ölçüm SDK'ları (Google Mobile Ads başlatma, Gemius, Spring, IAB OMID) yerinde kalır; izleme engellenmez.
 - Deneysel yama enjekte kodunun v3/v4/v5 kayıtlarına dayandığı için, düzen farklıysa artık yamalama sırasında hata verir (çalışma anı VerifyError'u yerine).
 - `loadAdWithRetry` gizlenen banner'ın kapsayıcısı (boşluk, başlık) ekranda kalabilir; sadece görsel.
+
+- Debug derlemede (`Release (debug / prerelease)`) her kanca `KarmaPatches` etiketiyle logcat satırı yazar; kararlı derlemede hiçbir log eklenmez. Loglara URL, token ya da kullanıcı verisi yazılmaz.

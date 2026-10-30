@@ -2,6 +2,7 @@ package dev.karmapatches.patches.nowtv.ads
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.bytecodePatch
+import dev.karmapatches.debugLogSmali
 import dev.karmapatches.patches.nowtv.NOW_TV_COMPATIBILITY
 
 /**
@@ -20,6 +21,12 @@ val keepControlsDuringAdsPatch = bytecodePatch(
 
     execute {
         // isDaionAdVisible alanı başka yerde okunmuyor (doğrulandı); gizleme komple atlanır.
-        daionAdInFingerprint.method.addInstructions(0, "return-void")
+        daionAdInFingerprint.method.addInstructions(
+            0,
+            """
+                ${debugLogSmali("p0", "p1", "live ad started, controls kept")}
+                return-void
+            """,
+        )
     }
 }
