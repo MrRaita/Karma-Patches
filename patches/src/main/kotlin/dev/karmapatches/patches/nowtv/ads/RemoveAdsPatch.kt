@@ -16,7 +16,13 @@ val removeBannerAdsPatch = bytecodePatch(
 
     execute {
         // p0 = AdManagerAdView. GONE (8) yapıp çık; reklam isteği hiç gitmez.
-        loadAdWithRetryFingerprint.method.addInstructions(
+        val bannerMethod = try {
+            loadAdWithRetryFingerprint.method
+        } catch (_: Exception) {
+            loadAdWithRetry309Fingerprint.method
+        }
+
+        bannerMethod.addInstructions(
             0,
             """
                 const/16 v0, 0x8
