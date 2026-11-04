@@ -8,7 +8,7 @@ internal val NOW_TV_COMPATIBILITY = Compatibility(
     name = "NOW TV",
     packageName = "tr.com.nowtv.android",
     targets = listOf(
-        AppTarget(version = "7.6.258"),
         AppTarget(version = "7.0.305"),
+        AppTarget(version = "7.0.309"),
     ),
 )

@@ -24,6 +24,25 @@ internal val loadAdWithRetryFingerprint = fingerprint {
 }
 
 /**
+ * Banner reklam yükleyici (NOW 7.0.309).
+ * Son parametre eski sürümlerdeki long yerine boolean (Z).
+ */
+internal val loadAdWithRetry309Fingerprint = fingerprint {
+    returns("V")
+    parameters(
+        "Lcom/google/android/gms/ads/admanager/AdManagerAdView;",
+        "Lcom/google/android/gms/ads/admanager/AdManagerAdRequest;",
+        "I",
+        "J",
+        "Z",
+    )
+    custom { method, classDef ->
+        classDef.type == "Ltr/com/nowtv/android/helpers/AdManagerExtensionsKt;" &&
+            method.name == "loadAdWithRetry"
+    }
+}
+
+/**
  * VOD oynatıcıda IMA reklam yükleyici sağlayıcısı (ExoPlayer AdsLoader.Provider lambda'sı).
  * VideoFragment.initPlayer$lambda$0$1(VideoFragment, Context, MediaItem$AdsConfiguration): AdsLoader
  * Ad R8 tarafından üretildiği için sadece tür imzasına güveniyoruz.
